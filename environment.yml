@@ -1,4 +1,4 @@
-name: deneir-script
+name: bert-emd
 channels:
   - anaconda
   - conda-forge
@@ -22,8 +22,8 @@ dependencies:
   - pytorch
   - tensorboard
   - nbconvert
-    # change the cudatoolkit to match 
-    # the CUDA version on your machine 
+    # change the cudatoolkit to match
+    # the CUDA version on your machine
   - cudatoolkit=11
   - transformers
   - pip

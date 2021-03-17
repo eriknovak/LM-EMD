@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vscode configurations
+.vscode
+
+# data folders and files
+*.tgz
+data/sasaki18/
+data/fasttext/
+
+
