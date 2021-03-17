@@ -1,0 +1,32 @@
+name: deneir-script
+channels:
+  - anaconda
+  - conda-forge
+  - huggingface
+  - plotly
+  - pytorch
+  - intel
+  - defaults
+dependencies:
+  - python=3.8
+  - jupyterlab
+  - ipywidgets>=7.5
+  - nodejs=12.4.0
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - plotly
+  - python-dotenv
+  - tqdm
+  - pytorch
+  - tensorboard
+  - nbconvert
+    # change the cudatoolkit to match 
+    # the CUDA version on your machine 
+  - cudatoolkit=11
+  - transformers
+  - pip
+  - pip:
+    - datasets
+    - dvc

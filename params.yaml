@@ -1,0 +1,9 @@
+training:
+  seed: 0
+  epochs: 1
+  batch_size: 16
+  epsilon: 0.000001
+  learning_rate: 0.000001
+  weight_decay: 0.01
+  grad_update_step: 1
+  
