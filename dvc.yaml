@@ -2,6 +2,7 @@ stages:
   train:
     cmd: python src/train.py data/sasaki18 data/model.pth data/losses
     deps:
+      - src/library/bert_model.py
       - src/train.py
       - data/sasaki18
     params:
@@ -22,6 +23,7 @@ stages:
   evaluate:
     cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
     deps:
+      - src/library/bert_model.py
       - src/evaluate.py
       - data/sasaki18
       - data/model.pth

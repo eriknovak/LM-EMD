@@ -172,13 +172,15 @@ class BERT(nn.Module):
             # get the mean of the embeddings
             q_embeds = prep_relevant_embeds(q_embeds, q_attention_mask).mean(dim=1)
             d_embeds = prep_relevant_embeds(d_embeds, d_attention_mask).mean(dim=1)
+        else:
+            raise Exception(f"Unsupported distance type: {self.type}")
 
         # normalize the vectors before calculating
         q_embeds = f.normalize(q_embeds, p=2, dim=1)
         d_embeds = f.normalize(d_embeds, p=2, dim=1)
 
         # calculate the mean distances
-        distances = q_embeds.matmul(d_embeds.T)
-        distances = distances.new_ones(distances.shape) - distances
+        distances = q_embeds.matmul(d_embeds.T).diagonal()
+        distances = torch.ones_like(distances) - distances
         # calculate the loss value
         return distances, None, None

@@ -23,10 +23,9 @@ params = yaml.safe_load(open("params.yaml"))
 # =====================================
 
 
-from library.data_loader import get_test_datasets
+from .library.data_loader import get_test_datasets
 
 test_data = {}
-
 data_folders = os.listdir(data_folder)
 for folder in tqdm(data_folders, desc="Preparing Data"):
     test_data[folder] = get_test_datasets(folder, max_examples=100)
@@ -43,7 +42,7 @@ import torch
 from transformers import BertTokenizer
 
 # import the NEW method
-from library.bert_model import BERT
+from .library.bert_model import BERT
 
 # set the device on which we will train the model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -98,7 +97,19 @@ def get_document_scores(batch):
     return outputs
 
 
-def get_average_precision_at_k(batch):
+def get_scores(batch):
+    """Get the P@1 and Average Precision for the provided batch
+
+    Args:
+        batch.query: The query texts.
+        batch.documents: The document texts.
+        batch.relevance: The relevance index.
+
+    Returns:
+        P@1: The precision at 1 score.
+        AveP: The average precision for the batch.
+
+    """
     # get parameters for calculation
     labels = torch.Tensor(batch["relevance"])
     # get the loss values
@@ -128,11 +139,21 @@ def get_average_precision_at_k(batch):
     return {"P@1": PatK[0].item(), "AveP": AveP.item()}
 
 
-def evaluate_dataset(dataset_key: str):
+def evaluate(dkey: str):
+    """Evaluates the model on the given dataset
+
+    Args:
+        dkey: The dataset key.
+
+    Returns:
+        P@1: The overall P@1 score of the model on the dataset.
+        MAP: The mean average precision of the model on the dataset.
+
+    """
     values = []
-    dataset = test_data[dataset_key]
+    dataset = test_data[dkey]
     # set a placeholder for evaluation results
-    for example in tqdm(dataset, desc=dataset_key):
+    for example in tqdm(dataset, desc=dkey):
         query = example["query"]
         documents = example["documents"]
         relevance = example["relevance"]
@@ -142,7 +163,7 @@ def evaluate_dataset(dataset_key: str):
         documents = [documents[index_shuffle[i]] for i in range(len(documents))]
         relevance = [relevance[index_shuffle[i]] for i in range(len(relevance))]
         # calculate the performance of the dataset
-        performance = get_average_precision_at_k(
+        performance = get_scores(
             {"query": query, "documents": documents, "relevance": relevance,}
         )
         values.append(performance)
@@ -161,10 +182,11 @@ def evaluate_dataset(dataset_key: str):
 scores = {}
 for key in test_data.keys():
     scores[key] = {
-        "model": ranking_type,
+        "model": params["model"],
+        "train": params["train"],
         "scores": None,
     }
-    scores[key]["scores"] = evaluate_dataset(key)
+    scores[key]["scores"] = evaluate(key)
 
 # create the scores folder
 if not os.path.exists(SCORES_DIR):

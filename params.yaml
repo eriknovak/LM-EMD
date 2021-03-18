@@ -1,11 +1,11 @@
 model:
   nit: 500 # number of interations for EMD
   reg: 0.02 # regularization factor for EMD
-  ranking: "emd" # emd / cls / max / mean
+  ranking: mean  # emd / cls / max / mean
 
 train:
-  loss: "margin_ranking" # cross_entropy / margin_ranking
-  optimizer: "adamw"
+  loss: margin_ranking   # cross_entropy / margin_ranking
+  optimizer: adamw
   learning_rate: 0.000001
   epsilon: 0.000001
   weight_decay: 0.01

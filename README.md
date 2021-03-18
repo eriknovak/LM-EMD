@@ -31,13 +31,66 @@ conda activate bert-emd
 ```
 
 ### Deactivate the environment
+
 When the environment is not in use anymore deactivate it by running:
 
 ```bash
 conda deactivate
 ```
 
-##
+## Data Preparation
+
+First download the data. Go into the `/data` folder and run
+
+```bash
+sh ./download.sh
+```
+
+This will download the data used in the experiments.
+
+## Experiment Setup
+
+To run the experiments one can manually change the `params.yaml` file with
+different parameters. Then, simply run the following commands:
+
+```bash
+# trains the model with the provided parameters
+python src/train.py
+# evaluates the model
+python src/evaluate.py
+```
+
+### Using DVC
+
+We use DVC to automatically run experiments with different parameters. The `dvc`
+is installed with `conda`. To run multiple experiments we execute the following
+command:
+
+```bash
+# prepare the queue of experiments
+dvc exp run --queue -S model.ranking=cls
+dvc exp run --queue -S model.ranking=max
+dvc exp run --queue -S model.ranking=mean
+dvc exp run --queue -S model.ranking=emd -S model.reg=0.02
+dvc exp run --queue -S model.ranking=emd -S model.reg=0.1
+dvc exp run --queue -S model.ranking=emd -S model.reg=1
+dvc exp run --queue -S model.ranking=emd -S model.reg=10
+
+# execute all queued experiments (run 3 jobs in parallel)
+dvc exp run --run-all --jobs 3
+```
+
+Afterwards, we can compare the performance of the models by running:
+
+```bash
+dvc exp show --include-params model.ranking,model.reg,model.nit,train.loss
+```
+
+
+
+
+
+
 
 
 

@@ -23,7 +23,7 @@ params = yaml.safe_load(open("params.yaml"))
 # =====================================
 
 
-from library.data_loader import get_train_datasets
+from .library.data_loader import get_train_datasets
 
 train_data = {}
 data_folders = os.listdir(data_folder)
@@ -45,7 +45,7 @@ import torch.optim as optim
 from transformers import BertTokenizer
 
 # import the NEW method
-from library.bert_model import BERT
+from .library.bert_model import BERT
 
 # set the device on which we will train the model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -72,7 +72,7 @@ if training_loss == "cross_entropy":
     # use cross entropy as a loss function
     loss_fn = nn.CrossEntropyLoss()
 elif training_loss == "margin_ranking":
-    # use the margin ranking loss as a function
+    # use the margin ranking loss function
     margin_ranking_loss = nn.MarginRankingLoss()
 
     def modified_margin_ranking_loss(distances, labels):

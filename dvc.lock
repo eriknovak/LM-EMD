@@ -7,13 +7,16 @@ stages:
       md5: b44b81841b7765d47eceacdc47c0d43a.dir
       size: 18928496529
       nfiles: 20
+    - path: src/library/bert_model.py
+      md5: 354332f84c89ccecf778f53d8ce76254
+      size: 6350
     - path: src/train.py
-      md5: 558e0a24810544ec3b3ead1e4b5250b1
-      size: 6233
+      md5: ff2a97ce39e7d16ad49fc555a18b1adb
+      size: 6230
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: emd
+        model.ranking: mean
         model.reg: 0.02
         train.epochs: 1
         train.epsilon: 1e-06
@@ -24,29 +27,32 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/losses
-      md5: 9a4d9cdc27354f7d84066c6f9d713a75.dir
-      size: 1950
+      md5: ed2a47b0b0c01566801c176d02787237.dir
+      size: 1832
       nfiles: 6
     - path: data/model.pth
-      md5: 8b2ec7b8498e6510687938b4569b5323
+      md5: adef6bb4ac672d74a4f6a507ae977cba
       size: 711465576
   evaluate:
     cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
     deps:
     - path: data/model.pth
-      md5: 8b2ec7b8498e6510687938b4569b5323
+      md5: ad1693995e16b29e73020373d7abcc10
       size: 711465576
     - path: data/sasaki18
       md5: b44b81841b7765d47eceacdc47c0d43a.dir
       size: 18928496529
       nfiles: 20
     - path: src/evaluate.py
-      md5: 8bb99e5f643cbe916dae1614abfb29b9
-      size: 5266
+      md5: 933f8b337c35ff74327e9949d6b1ba6f
+      size: 5796
+    - path: src/library/bert_model.py
+      md5: 354332f84c89ccecf778f53d8ce76254
+      size: 6350
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: emd
+        model.ranking: cls
         model.reg: 0.02
         train.epochs: 1
         train.epsilon: 1e-06
@@ -56,20 +62,20 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/scores/data_en_de.json
-      md5: 233a59c61a75cad302dcf73cb607b581
-      size: 34
+      md5: c121969246be380d14a57876267e7267
+      size: 50
     - path: data/scores/data_en_fr.json
-      md5: 233a59c61a75cad302dcf73cb607b581
-      size: 34
+      md5: 0310336085acc30c97389b4f2898fc1e
+      size: 64
     - path: data/scores/data_en_ja.json
-      md5: 233a59c61a75cad302dcf73cb607b581
-      size: 34
+      md5: a6f2a19a85667e3af806e169932c1d59
+      size: 64
     - path: data/scores/data_en_sw.json
-      md5: 233a59c61a75cad302dcf73cb607b581
-      size: 34
+      md5: 4f0622422f8b4e20f664d49c51c8564d
+      size: 65
     - path: data/scores/data_en_tl.json
-      md5: 34003def70b54153c03851f838ae7d5a
+      md5: 576dbcfccf2a32c9759d7fcf100f5a92
       size: 64
     - path: data/scores/scores.json
-      md5: 672da5c5cfdfacbcd5c6f1686e06a7b9
-      size: 672
+      md5: ca3155eaa938321a2fb6ca97676ef80e
+      size: 2504
