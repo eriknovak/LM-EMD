@@ -32,7 +32,7 @@ conda activate bert-emd
 
 ### Install the CUDA version of PyTorch
 
-Use conda to install the appropriate version of PyTorch. **NOTE:** Be 
+Use conda to install the appropriate version of PyTorch. **NOTE:** Be
 sure you install the right CUDA version.
 
 ```bash
@@ -80,7 +80,6 @@ command:
 dvc exp run --queue -S model.ranking=cls
 dvc exp run --queue -S model.ranking=max
 dvc exp run --queue -S model.ranking=mean
-dvc exp run --queue -S model.ranking=emd -S model.reg=0.02
 dvc exp run --queue -S model.ranking=emd -S model.reg=0.1
 dvc exp run --queue -S model.ranking=emd -S model.reg=1
 dvc exp run --queue -S model.ranking=emd -S model.reg=10

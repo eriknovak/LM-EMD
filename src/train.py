@@ -27,7 +27,7 @@ from library.data_loader import get_train_datasets, get_folders_in_dir, create_f
 train_data = {}
 data_folders = get_folders_in_dir(data_folder)
 for folder in tqdm(data_folders, desc="Preparing Data"):
-    train_data[folder] = get_train_datasets(folder, max_examples=100)
+    train_data[folder] = get_train_datasets(folder)
 
 
 # =====================================

@@ -28,7 +28,7 @@ from library.data_loader import get_test_datasets, get_folders_in_dir, create_fo
 test_data = {}
 data_folders = get_folders_in_dir(data_folder)
 for folder in tqdm(data_folders, desc="Preparing Data"):
-    test_data[folder] = get_test_datasets(folder, max_examples=100)
+    test_data[folder] = get_test_datasets(folder)
 
 
 # =====================================
