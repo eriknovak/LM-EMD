@@ -4,9 +4,9 @@ stages:
     cmd: python src/train.py data/sasaki18 data/model.pth data/losses
     deps:
     - path: data/sasaki18
-      md5: b44b81841b7765d47eceacdc47c0d43a.dir
+      md5: 6a8a419e77c9cc164224666ff2cad7c1.dir
       size: 18928496529
-      nfiles: 20
+      nfiles: 10
     - path: src/library/bert_model.py
       md5: 354332f84c89ccecf778f53d8ce76254
       size: 6350
@@ -27,22 +27,22 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/losses
-      md5: 81842c93ff95df3c60f5a436e5fee1f4.dir
-      size: 1840
+      md5: 1debdb4f61dfd54f2d60dcc9c33cbb8a.dir
+      size: 1866
       nfiles: 6
     - path: data/model.pth
-      md5: efce904bf10f0fe8e77c22ac6bdbc9ff
+      md5: 5aa1fa6e3e5e542ab8b191e0a8d2870c
       size: 711465576
   evaluate:
     cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
     deps:
     - path: data/model.pth
-      md5: efce904bf10f0fe8e77c22ac6bdbc9ff
+      md5: 5aa1fa6e3e5e542ab8b191e0a8d2870c
       size: 711465576
     - path: data/sasaki18
-      md5: b44b81841b7765d47eceacdc47c0d43a.dir
+      md5: 6a8a419e77c9cc164224666ff2cad7c1.dir
       size: 18928496529
-      nfiles: 20
+      nfiles: 10
     - path: src/evaluate.py
       md5: 933f8b337c35ff74327e9949d6b1ba6f
       size: 5796
