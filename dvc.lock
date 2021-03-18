@@ -11,15 +11,15 @@ stages:
       md5: 354332f84c89ccecf778f53d8ce76254
       size: 6350
     - path: src/library/data_loader.py
-      md5: c995f25f2bbc31ba9a6dc7ae12d57c98
-      size: 3726
+      md5: 69cf839185b3d3da3c6866142cd28b59
+      size: 4134
     - path: src/train.py
       md5: f5a9874f9fba8f963b9a63b528e1e2b3
       size: 6235
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: max
+        model.ranking: cls
         model.reg: 0.02
         train.epochs: 1
         train.epsilon: 1e-06
@@ -30,17 +30,17 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/losses
-      md5: d782a9e4ddc06edfc2e0d1ab0d5afb13.dir
-      size: 1908
+      md5: d594791c5ae8f8a6144f98abd86bdd3a.dir
+      size: 1950
       nfiles: 6
     - path: data/model.pth
-      md5: 08bbaa925d1c6a2eabe08c55eac25372
+      md5: d8073d2d0720a09e0a0bc8497068646b
       size: 711465576
   evaluate:
     cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
     deps:
     - path: data/model.pth
-      md5: 08bbaa925d1c6a2eabe08c55eac25372
+      md5: d8073d2d0720a09e0a0bc8497068646b
       size: 711465576
     - path: data/sasaki18
       md5: 6a8a419e77c9cc164224666ff2cad7c1.dir
@@ -53,12 +53,12 @@ stages:
       md5: 354332f84c89ccecf778f53d8ce76254
       size: 6350
     - path: src/library/data_loader.py
-      md5: c995f25f2bbc31ba9a6dc7ae12d57c98
-      size: 3726
+      md5: 69cf839185b3d3da3c6866142cd28b59
+      size: 4134
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: max
+        model.ranking: cls
         model.reg: 0.02
         train.epochs: 1
         train.epsilon: 1e-06
@@ -68,20 +68,20 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/scores/data_en_de.json
-      md5: 51966d81d2109bd240b74320f49c068d
-      size: 64
+      md5: 8818d61008fa405bbb5f604554a65201
+      size: 50
     - path: data/scores/data_en_fr.json
-      md5: 51966d81d2109bd240b74320f49c068d
+      md5: a103ccfcdffff0d3f8b68b3dc56063c1
       size: 64
     - path: data/scores/data_en_ja.json
-      md5: ac65e23cc74dd3f7762eb6d5cb26e75c
-      size: 63
+      md5: 7777f3f17b64d2aa9f0f91aa0effb79e
+      size: 64
     - path: data/scores/data_en_sw.json
       md5: 233a59c61a75cad302dcf73cb607b581
       size: 34
     - path: data/scores/data_en_tl.json
-      md5: f2ba97b5ce128e6d55c921e62c3386ff
-      size: 63
+      md5: 7c9a46b14d0719644e9276459e2ddfb3
+      size: 64
     - path: data/scores/scores.json
-      md5: 990451b7c2d6804754b14982d3c5c145
-      size: 2490
+      md5: ef91ee4ab8db7c3a8af4a966f6c113dd
+      size: 2478

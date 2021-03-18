@@ -6,7 +6,7 @@ from datasets import Dataset
 from os.path import dirname, abspath, join, exists
 
 # get the ROOT directory
-__ROOTDIR__ = dirname(dirname(dirname(abspath(__file__))))
+ROOTDIR = dirname(dirname(dirname(abspath(__file__))))
 
 def readfile(filepath):
     """Opens and reads the line of the file
@@ -86,8 +86,11 @@ def get_train_datasets(datatype, batch_size=5, max_examples=sys.maxsize):
         DataLoader: The dataset batches.
 
     """
+    # QUICK HACK for parallel processing
+    index = ROOTDIR.find("/.dvc")
+    datapath = ROOTDIR[:index] if index >= 0 else ROOTDIR
     # prepare the dataset paths
-    train_path = f"{__ROOTDIR__}/data/sasaki18/{datatype}/train.txt"
+    train_path = f"{datapath}/data/sasaki18/{datatype}/train.txt"
     # load the datasets
     data = prepare_dataset(train_path, max_examples=max_examples)
     data = Dataset.from_dict(data)
@@ -106,8 +109,11 @@ def get_test_datasets(datatype, batch_size=40, max_examples=sys.maxsize):
         DataLoader: The dataset batches.
 
     """
+    # QUICK HACK for parallel processing
+    index = ROOTDIR.find("/.dvc")
+    datapath = ROOTDIR[:index] if index >= 0 else ROOTDIR
     # prepare the dataset paths
-    test_path = f"{__ROOTDIR__}/data/sasaki18/{datatype}/test1.txt"
+    test_path = f"{datapath}/data/sasaki18/{datatype}/test1.txt"
     # load the datasets
     data = prepare_dataset(test_path, max_examples=max_examples)
     data = Dataset.from_dict(data)
@@ -125,7 +131,11 @@ def get_folders_in_dir(path):
         List[str]: The list of folders.
 
     """
-    return os.listdir(join(__ROOTDIR__, path))
+    # QUICK HACK for parallel processing
+    index = ROOTDIR.find("/.dvc")
+    datapath = ROOTDIR[:index] if index >= 0 else ROOTDIR
+    # get the list of folders
+    return os.listdir(join(datapath, path))
 
 
 def create_folder(path):
@@ -135,5 +145,5 @@ def create_folder(path):
         path (str): The relative path to the project root.
 
     """
-    if not exists(join(__ROOTDIR__, path)):
-        os.makedirs(join(__ROOTDIR__, path))
+    if not exists(join(ROOTDIR, path)):
+        os.makedirs(join(ROOTDIR, path))

@@ -5,7 +5,6 @@ stages:
       - src/library/bert_model.py
       - src/library/data_loader.py
       - src/train.py
-      - data/sasaki18
     params:
       - model.nit
       - model.reg
@@ -27,7 +26,6 @@ stages:
       - src/library/bert_model.py
       - src/library/data_loader.py
       - src/evaluate.py
-      - data/sasaki18
       - data/model.pth
     params:
       - model.nit

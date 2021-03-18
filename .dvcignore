@@ -2,5 +2,9 @@
 # the performance. Learn more at
 # https://dvc.org/doc/user-guide/dvcignore
 
+# ignore unrequired files
 data/sasaki18/**/dev.txt
 data/sasaki18/**/test1_for_Eval_pl.txt
+
+# ignore the fasttext embeddings
+data/fasttext
