@@ -29,7 +29,7 @@ dependencies:
   - gensim
   - nltk
   - pip
+  - dvc
   - pip:
     - datasets
-    - dvc
     - POT

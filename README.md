@@ -30,6 +30,15 @@ To activate the newly set environment run:
 conda activate bert-emd
 ```
 
+### Install the CUDA version of PyTorch
+
+Use conda to install the appropriate version of PyTorch. **NOTE:** Be 
+sure you install the right CUDA version.
+
+```bash
+conda install pytorch cudatoolkit=11.1 -c pytorch -c conda-forge
+```
+
 ### Deactivate the environment
 
 When the environment is not in use anymore deactivate it by running:
