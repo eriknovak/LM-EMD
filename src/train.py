@@ -17,16 +17,15 @@ LOSS_DIR = sys.argv[3]
 
 params = yaml.safe_load(open("params.yaml"))
 
-
 # =====================================
 # Import Training Data
 # =====================================
 
 
-from library.data_loader import get_train_datasets
+from library.data_loader import get_train_datasets, get_folders_in_dir, create_folder
 
 train_data = {}
-data_folders = os.listdir(data_folder)
+data_folders = get_folders_in_dir(data_folder)
 for folder in tqdm(data_folders, desc="Preparing Data"):
     train_data[folder] = get_train_datasets(folder, max_examples=100)
 
@@ -196,8 +195,7 @@ for epoch in tqdm(range(n_epochs), desc="Epochs"):
 # =====================================
 
 # create the losses folder
-if not os.path.exists(LOSS_DIR):
-    os.makedirs(LOSS_DIR)
+create_folder(LOSS_DIR)
 
 # save all losses
 with open(f"{LOSS_DIR}/losses.json", "w") as f:

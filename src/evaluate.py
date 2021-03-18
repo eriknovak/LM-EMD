@@ -23,10 +23,10 @@ params = yaml.safe_load(open("params.yaml"))
 # =====================================
 
 
-from library.data_loader import get_test_datasets
+from library.data_loader import get_test_datasets, get_folders_in_dir, create_folder
 
 test_data = {}
-data_folders = os.listdir(data_folder)
+data_folders = get_folders_in_dir(data_folder)
 for folder in tqdm(data_folders, desc="Preparing Data"):
     test_data[folder] = get_test_datasets(folder, max_examples=100)
 
@@ -189,8 +189,7 @@ for key in test_data.keys():
     scores[key]["scores"] = evaluate(key)
 
 # create the scores folder
-if not os.path.exists(SCORES_DIR):
-    os.makedirs(SCORES_DIR)
+create_folder(SCORES_DIR)
 
 # save all scores
 with open(f"{SCORES_DIR}/scores.json", "w") as f:

@@ -1,11 +1,12 @@
-import sys
 import os
 import re
+import sys
 import torch
 from datasets import Dataset
+from os.path import dirname, abspath, join, exists
 
 # get the ROOT directory
-__ROOTDIR__ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+__ROOTDIR__ = dirname(dirname(dirname(abspath(__file__))))
 
 def readfile(filepath):
     """Opens and reads the line of the file
@@ -113,3 +114,26 @@ def get_test_datasets(datatype, batch_size=40, max_examples=sys.maxsize):
     data = torch.utils.data.DataLoader(data, batch_size=batch_size)
     return data
 
+
+def get_folders_in_dir(path):
+    """Gets the list of folders in directory
+
+    Args:
+        path (str): The relative path to the project root.
+
+    Returns:
+        List[str]: The list of folders.
+
+    """
+    return os.listdir(join(__ROOTDIR__, path))
+
+
+def create_folder(path):
+    """Creates a folder if it does not exist
+
+    Args:
+        path (str): The relative path to the project root.
+
+    """
+    if not exists(join(__ROOTDIR__, path)):
+        os.makedirs(join(__ROOTDIR__, path))

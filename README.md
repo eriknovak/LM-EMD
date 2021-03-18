@@ -83,7 +83,7 @@ dvc exp run --run-all --jobs 3
 Afterwards, we can compare the performance of the models by running:
 
 ```bash
-dvc exp show --include-params model.ranking,model.reg,model.nit,train.loss
+dvc exp show
 ```
 
 
