@@ -77,9 +77,9 @@ command:
 
 ```bash
 # prepare the queue of experiments
-dvc exp run --queue -S model.ranking=cls
-dvc exp run --queue -S model.ranking=max
-dvc exp run --queue -S model.ranking=mean
+dvc exp run --queue -S model.ranking=cls -S model.reg=None -S model.nit=None
+dvc exp run --queue -S model.ranking=max -S model.reg=None -S model.nit=None
+dvc exp run --queue -S model.ranking=mean -S model.reg=None -S model.nit=None
 dvc exp run --queue -S model.ranking=emd -S model.reg=0.1
 dvc exp run --queue -S model.ranking=emd -S model.reg=1
 dvc exp run --queue -S model.ranking=emd -S model.reg=10
