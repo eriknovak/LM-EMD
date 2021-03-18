@@ -1,3 +1,6 @@
 # Add patterns of files dvc should ignore, which could improve
 # the performance. Learn more at
 # https://dvc.org/doc/user-guide/dvcignore
+
+data/sasaki18/**/dev.txt
+data/sasaki18/**/test1_for_Eval_pl.txt

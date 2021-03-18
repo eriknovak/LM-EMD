@@ -11,12 +11,12 @@ stages:
       md5: 354332f84c89ccecf778f53d8ce76254
       size: 6350
     - path: src/train.py
-      md5: ff2a97ce39e7d16ad49fc555a18b1adb
-      size: 6230
+      md5: c93e3b00a16173392367fa6928874063
+      size: 6228
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: mean
+        model.ranking: emd
         model.reg: 0.02
         train.epochs: 1
         train.epsilon: 1e-06
@@ -27,17 +27,17 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/losses
-      md5: ed2a47b0b0c01566801c176d02787237.dir
-      size: 1832
+      md5: 81842c93ff95df3c60f5a436e5fee1f4.dir
+      size: 1840
       nfiles: 6
     - path: data/model.pth
-      md5: adef6bb4ac672d74a4f6a507ae977cba
+      md5: efce904bf10f0fe8e77c22ac6bdbc9ff
       size: 711465576
   evaluate:
     cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
     deps:
     - path: data/model.pth
-      md5: ad1693995e16b29e73020373d7abcc10
+      md5: efce904bf10f0fe8e77c22ac6bdbc9ff
       size: 711465576
     - path: data/sasaki18
       md5: b44b81841b7765d47eceacdc47c0d43a.dir
@@ -52,7 +52,7 @@ stages:
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: cls
+        model.ranking: emd
         model.reg: 0.02
         train.epochs: 1
         train.epsilon: 1e-06
@@ -62,20 +62,20 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/scores/data_en_de.json
-      md5: c121969246be380d14a57876267e7267
-      size: 50
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
     - path: data/scores/data_en_fr.json
-      md5: 0310336085acc30c97389b4f2898fc1e
-      size: 64
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
     - path: data/scores/data_en_ja.json
-      md5: a6f2a19a85667e3af806e169932c1d59
-      size: 64
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
     - path: data/scores/data_en_sw.json
-      md5: 4f0622422f8b4e20f664d49c51c8564d
-      size: 65
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
     - path: data/scores/data_en_tl.json
-      md5: 576dbcfccf2a32c9759d7fcf100f5a92
+      md5: 34003def70b54153c03851f838ae7d5a
       size: 64
     - path: data/scores/scores.json
-      md5: ca3155eaa938321a2fb6ca97676ef80e
-      size: 2504
+      md5: c79b49c1b58ff2257587bb582a30f45c
+      size: 2402
