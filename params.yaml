@@ -1,25 +1,14 @@
-
 model:
   nit: 500 # number of interations for EMD
-  reg: 0.1 # regularization factor for EMD
+  reg: 0.02 # regularization factor for EMD
   ranking: "emd" # emd / cls / max / mean
 
-training:
-  # random seed
-  seed: 0
-
-  # optimizer model
-  loss: "cross_entropy" # cross_entropy / margin ranking
+train:
+  loss: "margin_ranking" # cross_entropy / margin_ranking
   optimizer: "adamw"
   learning_rate: 0.000001
   epsilon: 0.000001
   weight_decay: 0.01
 
-  # training
   epochs: 1
-  batch_size: 16
-  grad_update_step: 1
-
-evaluate:
-  # which language do we evaluate
-  language: "de"
+  grad_update_step: 16

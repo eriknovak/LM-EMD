@@ -1,10 +1,11 @@
+import sys
 import os
 import re
 import torch
 from datasets import Dataset
 
 # get the ROOT directory
-__ROOTDIR__ = os.path.dirname(os.path.abspath("."))
+__ROOTDIR__ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def readfile(filepath):
     """Opens and reads the line of the file
@@ -40,13 +41,13 @@ def format_row(row):
         return {
             "query": query.strip(),
             "document": document.strip(),
-            "relevance": 1 if int(rel.strip()) > 0 else -1,
+            "relevance": 1 if int(rel.strip()) > 0 else 0,
         }
     else:
         return None
 
 
-def prepare_dataset(filepath):
+def prepare_dataset(filepath, max_examples):
     """Prepares the dataset
 
     Args:
@@ -63,8 +64,9 @@ def prepare_dataset(filepath):
     # the dataset placeholder
     dataset = {"query": [], "documents": [], "relevance": []}
 
-    for row in filerows:
-        attrs = format_row(row)
+    max_iter = max_examples if max_examples < len(filerows) else len(filerows)
+    for i in range(max_iter):
+        attrs = format_row(filerows[i])
         if attrs:
             dataset["query"].append(attrs["query"])
             dataset["documents"].append(attrs["document"])
@@ -72,7 +74,7 @@ def prepare_dataset(filepath):
     return dataset
 
 
-def get_train_datasets(datatype, batch_size=5):
+def get_train_datasets(datatype, batch_size=5, max_examples=sys.maxsize):
     """Gets and prepares the training datasets
 
     Args:
@@ -86,13 +88,13 @@ def get_train_datasets(datatype, batch_size=5):
     # prepare the dataset paths
     train_path = f"{__ROOTDIR__}/data/sasaki18/{datatype}/train.txt"
     # load the datasets
-    data = prepare_dataset(train_path)
+    data = prepare_dataset(train_path, max_examples=max_examples)
     data = Dataset.from_dict(data)
     data = torch.utils.data.DataLoader(data, batch_size=batch_size)
     return data
 
 
-def get_test_datasets(datatype, batch_size=40):
+def get_test_datasets(datatype, batch_size=40, max_examples=sys.maxsize):
     """Gets and prepares the test datasets
 
     Args:
@@ -106,7 +108,7 @@ def get_test_datasets(datatype, batch_size=40):
     # prepare the dataset paths
     test_path = f"{__ROOTDIR__}/data/sasaki18/{datatype}/test1.txt"
     # load the datasets
-    data = prepare_dataset(test_path)
+    data = prepare_dataset(test_path, max_examples=max_examples)
     data = Dataset.from_dict(data)
     data = torch.utils.data.DataLoader(data, batch_size=batch_size)
     return data

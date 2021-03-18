@@ -1,0 +1,50 @@
+stages:
+  train:
+    cmd: python src/train.py data/sasaki18 data/model.pth data/losses
+    deps:
+      - src/train.py
+      - data/sasaki18
+    params:
+      - model.nit
+      - model.reg
+      - model.ranking
+      - train.loss
+      - train.optimizer
+      - train.learning_rate
+      - train.epsilon
+      - train.weight_decay
+      - train.epochs
+      - train.grad_update_step
+    outs:
+      - data/model.pth
+      - data/losses
+
+  evaluate:
+    cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
+    deps:
+      - src/evaluate.py
+      - data/sasaki18
+      - data/model.pth
+    params:
+      - model.nit
+      - model.reg
+      - model.ranking
+      - train.optimizer
+      - train.learning_rate
+      - train.epsilon
+      - train.weight_decay
+      - train.epochs
+      - train.grad_update_step
+    metrics:
+      - data/scores/data_en_ja.json:
+          cache: false
+      - data/scores/data_en_de.json:
+          cache: false
+      - data/scores/data_en_tl.json:
+          cache: false
+      - data/scores/data_en_fr.json:
+          cache: false
+      - data/scores/data_en_sw.json:
+          cache: false
+    outs:
+      - data/scores/scores.json

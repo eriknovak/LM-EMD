@@ -135,5 +135,5 @@ dmypy.json
 *.tgz
 data/sasaki18/
 data/fasttext/
-
+data/losses/
 

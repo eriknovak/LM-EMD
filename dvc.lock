@@ -1,0 +1,75 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py data/sasaki18 data/model.pth data/losses
+    deps:
+    - path: data/sasaki18
+      md5: b44b81841b7765d47eceacdc47c0d43a.dir
+      size: 18928496529
+      nfiles: 20
+    - path: src/train.py
+      md5: 558e0a24810544ec3b3ead1e4b5250b1
+      size: 6233
+    params:
+      params.yaml:
+        model.nit: 500
+        model.ranking: emd
+        model.reg: 0.02
+        train.epochs: 1
+        train.epsilon: 1e-06
+        train.grad_update_step: 16
+        train.learning_rate: 1e-06
+        train.loss: margin_ranking
+        train.optimizer: adamw
+        train.weight_decay: 0.01
+    outs:
+    - path: data/losses
+      md5: 9a4d9cdc27354f7d84066c6f9d713a75.dir
+      size: 1950
+      nfiles: 6
+    - path: data/model.pth
+      md5: 8b2ec7b8498e6510687938b4569b5323
+      size: 711465576
+  evaluate:
+    cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
+    deps:
+    - path: data/model.pth
+      md5: 8b2ec7b8498e6510687938b4569b5323
+      size: 711465576
+    - path: data/sasaki18
+      md5: b44b81841b7765d47eceacdc47c0d43a.dir
+      size: 18928496529
+      nfiles: 20
+    - path: src/evaluate.py
+      md5: 8bb99e5f643cbe916dae1614abfb29b9
+      size: 5266
+    params:
+      params.yaml:
+        model.nit: 500
+        model.ranking: emd
+        model.reg: 0.02
+        train.epochs: 1
+        train.epsilon: 1e-06
+        train.grad_update_step: 16
+        train.learning_rate: 1e-06
+        train.optimizer: adamw
+        train.weight_decay: 0.01
+    outs:
+    - path: data/scores/data_en_de.json
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
+    - path: data/scores/data_en_fr.json
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
+    - path: data/scores/data_en_ja.json
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
+    - path: data/scores/data_en_sw.json
+      md5: 233a59c61a75cad302dcf73cb607b581
+      size: 34
+    - path: data/scores/data_en_tl.json
+      md5: 34003def70b54153c03851f838ae7d5a
+      size: 64
+    - path: data/scores/scores.json
+      md5: 672da5c5cfdfacbcd5c6f1686e06a7b9
+      size: 672

@@ -1,5 +1,7 @@
-# Deneir Script
-The template for continuous and integrated research
+# BERT EMD
+The repository containing the experiment files for the explainable
+document ranking model using multilingual BERT and Regularized Earth
+Movers Distance.
 
 ## Requirements
 Before starting the project make sure these requirements are available:
@@ -34,6 +36,9 @@ When the environment is not in use anymore deactivate it by running:
 ```bash
 conda deactivate
 ```
+
+##
+
 
 
 [git]: https://git-scm.com/
