@@ -94,6 +94,15 @@ Afterwards, we can compare the performance of the models by running:
 dvc exp show
 ```
 
+# Acknowledgments
+This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
+
+The work is supported by the following EU Horizon 2020 projects:
+- [Envirolens][elens] (grant no. 761758). The project demonstrates and promotes the use of Earth observation as direct evidence for environmental law enforcement,
+including in a court of law and in related contractual negotiations.
+- [X5GON][x5gon] (grant no. 821918). The projects goal is to connect different Open Educational Resources (OER) providers around the globe and to provide meaningful
+ AI tools to support the learning process.
+
 
 
 
@@ -105,3 +114,8 @@ dvc exp show
 [git]: https://git-scm.com/
 [dvc]: https://dvc.org/
 [conda]: https://docs.conda.io/en/latest/
+
+[ailab]: http://ailab.ijs.si/
+[ijs]: https://www.ijs.si/
+[elens]: https://envirolens.eu/
+[x5gon]: https://www.x5gon.org/
