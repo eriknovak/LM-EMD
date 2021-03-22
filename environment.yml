@@ -1,4 +1,4 @@
-name: bert-emd
+name: lm-emd
 channels:
   - anaconda
   - conda-forge
