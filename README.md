@@ -1,7 +1,8 @@
-# BERT EMD
+# LM-EMD
 The repository containing the experiment files for the explainable
-document ranking model using multilingual BERT and Regularized Earth
-Movers Distance.
+cross-lingual document ranking model using multilingual BERT and 
+Regularized Earth Movers Distance.
+
 
 ## Requirements
 Before starting the project make sure these requirements are available:
@@ -10,9 +11,6 @@ Before starting the project make sure these requirements are available:
 - [dvc][dvc]. For versioning your data (part of conda environment).
 
 ## Setup
-
-**NOTE:** For each new project it is advisable to change the environment name
-and to make sure that the required modules are in the `environment.yml` file.
 
 ### Install the conda environment
 
@@ -27,7 +25,7 @@ conda env create -f environment.yml
 To activate the newly set environment run:
 
 ```bash
-conda activate bert-emd
+conda activate lm-emd
 ```
 
 ### Install the CUDA version of PyTorch
