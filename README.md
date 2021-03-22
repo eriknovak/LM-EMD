@@ -1,7 +1,7 @@
 # LM-EMD
 The repository containing the experiment files for the explainable
-cross-lingual document ranking model using multilingual BERT and 
-Regularized Earth Movers Distance.
+cross-lingual document ranking model using multilingual language model 
+and Regularized Earth Movers Distance.
 
 
 ## Requirements
