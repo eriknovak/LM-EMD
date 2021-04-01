@@ -1,7 +1,7 @@
 model:
   nit: 500
-  reg: 0.02
-  ranking: cls  # emd / cls / max / mean
+  reg: 0.1
+  ranking: emd  # emd / cls / max / mean
 
 train:
   loss: margin_ranking # cross_entropy / margin_ranking

@@ -3,10 +3,6 @@ stages:
   train:
     cmd: python src/train.py data/sasaki18 data/model.pth data/losses
     deps:
-    - path: data/sasaki18
-      md5: 6a8a419e77c9cc164224666ff2cad7c1.dir
-      size: 18928496529
-      nfiles: 10
     - path: src/library/bert_model.py
       md5: 354332f84c89ccecf778f53d8ce76254
       size: 6350
@@ -14,13 +10,13 @@ stages:
       md5: 69cf839185b3d3da3c6866142cd28b59
       size: 4134
     - path: src/train.py
-      md5: f5a9874f9fba8f963b9a63b528e1e2b3
-      size: 6235
+      md5: 62cea4c38eae49042ce4044788a214b5
+      size: 6217
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: cls
-        model.reg: 0.02
+        model.ranking: emd
+        model.reg: 0.1
         train.epochs: 1
         train.epsilon: 1e-06
         train.grad_update_step: 16
@@ -30,25 +26,21 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/losses
-      md5: d594791c5ae8f8a6144f98abd86bdd3a.dir
-      size: 1950
+      md5: 164fac31c35beb02cbce4958d4f07120.dir
+      size: 8340494
       nfiles: 6
     - path: data/model.pth
-      md5: d8073d2d0720a09e0a0bc8497068646b
-      size: 711465576
+      md5: 9c0cfb2485397d723e01eac2c2d4f010
+      size: 711502839
   evaluate:
     cmd: python src/evaluate.py data/sasaki18 data/model.pth data/scores
     deps:
     - path: data/model.pth
-      md5: d8073d2d0720a09e0a0bc8497068646b
-      size: 711465576
-    - path: data/sasaki18
-      md5: 6a8a419e77c9cc164224666ff2cad7c1.dir
-      size: 18928496529
-      nfiles: 10
+      md5: 9c0cfb2485397d723e01eac2c2d4f010
+      size: 711502839
     - path: src/evaluate.py
-      md5: b0a4de96a146b3c1dd8a3f897d09621d
-      size: 5802
+      md5: efc253751135c19d4a7181f4ac2e34ec
+      size: 5784
     - path: src/library/bert_model.py
       md5: 354332f84c89ccecf778f53d8ce76254
       size: 6350
@@ -58,8 +50,8 @@ stages:
     params:
       params.yaml:
         model.nit: 500
-        model.ranking: cls
-        model.reg: 0.02
+        model.ranking: emd
+        model.reg: 0.1
         train.epochs: 1
         train.epsilon: 1e-06
         train.grad_update_step: 16
@@ -68,20 +60,20 @@ stages:
         train.weight_decay: 0.01
     outs:
     - path: data/scores/data_en_de.json
-      md5: 8818d61008fa405bbb5f604554a65201
-      size: 50
+      md5: 419ac07fa34e92a1cd4fde2ac3d74cc1
+      size: 64
     - path: data/scores/data_en_fr.json
-      md5: a103ccfcdffff0d3f8b68b3dc56063c1
+      md5: 8bd8545a6cee7175af0447b31f55d5ef
       size: 64
     - path: data/scores/data_en_ja.json
-      md5: 7777f3f17b64d2aa9f0f91aa0effb79e
+      md5: dde942a2663297aab146bfe15ecd1c89
       size: 64
     - path: data/scores/data_en_sw.json
-      md5: 233a59c61a75cad302dcf73cb607b581
-      size: 34
+      md5: 641aeccebe28ae0ed702356d66601178
+      size: 64
     - path: data/scores/data_en_tl.json
-      md5: 7c9a46b14d0719644e9276459e2ddfb3
+      md5: ec3cdb85c2240fbf02bd9f06bdaa493d
       size: 64
     - path: data/scores/scores.json
-      md5: ef91ee4ab8db7c3a8af4a966f6c113dd
-      size: 2478
+      md5: b7907ca1254e9011a7cd836fbe555f29
+      size: 2517
