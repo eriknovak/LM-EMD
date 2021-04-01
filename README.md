@@ -62,9 +62,9 @@ different parameters. Then, simply run the following commands:
 
 ```bash
 # trains the model with the provided parameters
-python src/train.py
+python src/train.py data/sasaki18 data/model.pth data/losses
 # evaluates the model
-python src/evaluate.py
+python src/evaluate.py data/sasaki18 data/model.pth data/scores
 ```
 
 ### Using DVC
@@ -92,6 +92,15 @@ Afterwards, we can compare the performance of the models by running:
 dvc exp show
 ```
 
+To save the best performance parameters run:
+
+```bash
+dvc exp apply [exp-id]
+```
+
+
+
+
 ## 📋 Experiment Results
 
 The above experiments yield the following results.
@@ -102,9 +111,9 @@ The above experiments yield the following results.
 | BERT-MAX  | .941 / .964 | .948 / .969 | .798 / .874 | .912 / .946 | .824 / .886 |
 | BERT-MEAN | .967 / .980 | .958 / .976 | .786 / .874 | .941 / .965 | .835 / .897 |
 | LM-EMD   	| .977 / .986 | .974 / .985 | .801 / .874 | .955 / .973 | .890 / .932 |
-<caption>
-Table 1. CLIR performance of the models. The scores are formatted as P@1/MAP scores.
-</caption>
+
+*Table 1. CLIR performance of the models. The scores are formatted as P@1/MAP scores.*
+
 
 <br/>
 <br/>
@@ -121,13 +130,19 @@ regularization factors, we got the following results.
 |         | PR     | .970 / .982 | .968 / .981 | .809 / .883 | .910 / .946 | .859 / .913 |
 | γ = 10  | CE     | .874 / .926 | .838 / .907 | .712 / .830 | -    / -    | -    / -    |
 |         | PR     | .965 / .979 | .961 / .978 | .805 / .881 | .899 / .941 | .835 / .899 |
-<caption>
-Table 2. The performance comparison of the LM-EMD model trained with different regularization
+
+*Table 2. The performance comparison of the LM-EMD model trained with different regularization
 factor (γ) values, and using the cross-entropy (CE) and pairwise ranking (PR) loss functions
-during training. The scores are formatted as P@1/MAP scores.
-</caption>
+during training. The scores are formatted as P@1/MAP scores.*
 
+<br/>
+<br/>
 
+## 🔎 Interpretability
+
+```bash
+python src/interpret.py data/model.pth data/interpret.png
+```
 
 
 # 🏬 Acknowledgments

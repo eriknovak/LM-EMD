@@ -30,6 +30,7 @@ dependencies:
   - nltk
   - pip
   - dvc
+  - black
   - pip:
     - datasets
     - POT

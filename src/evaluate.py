@@ -72,7 +72,7 @@ def get_document_scores(batch):
 
     Returns:
         outputs: The outputs of the model.
-            outputs[0]: The distances scores.
+            outputs[0]: The document scores.
             outputs[1]: The cost matrix.
             outputs[2]: The transportation matrix.
 
@@ -177,6 +177,7 @@ def evaluate(dkey: str):
 # =====================================
 # Execute the Evaluation Process
 # =====================================
+
 
 scores = {}
 for key in test_data.keys():

@@ -120,18 +120,18 @@ def train(batch, loss_fn):
     query = batch["query"]
     documents = batch["documents"]
     relevance = batch["relevance"]
-    q_inputs = tokenizer(query, truncation=True, padding=True, return_tensors='pt')
-    d_inputs = tokenizer(documents, truncation=True, padding=True, return_tensors='pt')
+    q_inputs = tokenizer(query, truncation=True, padding=True, return_tensors="pt")
+    d_inputs = tokenizer(documents, truncation=True, padding=True, return_tensors="pt")
     labels = torch.LongTensor([relevance.tolist().index(1)]).to(device)
     # get the input batches
     inputs = {
-        'q_input_ids': q_inputs['input_ids'],
-        'q_attention_mask': q_inputs['attention_mask'],
-        'd_input_ids': d_inputs['input_ids'],
-        'd_attention_mask': d_inputs['attention_mask'],
+        "q_input_ids": q_inputs["input_ids"],
+        "q_attention_mask": q_inputs["attention_mask"],
+        "d_input_ids": d_inputs["input_ids"],
+        "d_attention_mask": d_inputs["attention_mask"],
     }
     # move the batch tensors to the same device as the model
-    inputs = { k: v.to(device) for k, v in inputs.items() }
+    inputs = {k: v.to(device) for k, v in inputs.items()}
     # get the model outpu ts
     outputs = model(**inputs)
     distances = (1 - outputs[0]).unsqueeze(0)
@@ -172,7 +172,7 @@ for epoch in tqdm(range(n_epochs), desc="Epochs"):
                     model_corrupted = True
                     break
                 tloss = current_loss / grad_update_step
-                losses[key].append({ "step": i, "loss": tloss })
+                losses[key].append({"step": i, "loss": tloss})
                 current_loss = 0
         if model_corrupted:
             break
@@ -183,7 +183,7 @@ for epoch in tqdm(range(n_epochs), desc="Epochs"):
             model_corrupted = True
             break
         tloss = current_loss / grad_update_step
-        losses[key].append({ "step": i, "loss": tloss })
+        losses[key].append({"step": i, "loss": tloss})
     if model_corrupted:
         print("The model is corrupted")
         break
@@ -203,7 +203,7 @@ with open(f"{LOSS_DIR}/losses.json", "w") as f:
 # save the losses in individual files
 for key, loss in losses.items():
     with open(f"{LOSS_DIR}/{key}.json", "w") as f:
-        json.dump({ "loss": loss }, f, indent=4)
+        json.dump({"loss": loss}, f, indent=4)
 
 # save the model
 torch.save(model.state_dict(), model_file)
