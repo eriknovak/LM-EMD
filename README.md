@@ -4,13 +4,13 @@ cross-lingual document ranking model using multilingual language model
 and Regularized Earth Movers Distance.
 
 
-## Requirements
+## ✔️ Requirements
 Before starting the project make sure these requirements are available:
 - [conda][conda]. For setting up your research environment and python dependencies.
 - [git][git]. For versioning your code.
 - [dvc][dvc]. For versioning your data (part of conda environment).
 
-## Setup
+## 💻 Setup
 
 ### Install the conda environment
 
@@ -45,7 +45,7 @@ When the environment is not in use anymore deactivate it by running:
 conda deactivate
 ```
 
-## Data Preparation
+## 💾 Data Preparation
 
 First download the data. Go into the `/data` folder and run
 
@@ -55,7 +55,7 @@ sh ./download.sh
 
 This will download the data used in the experiments.
 
-## Experiment Setup
+## 🥼 Experiment Setup
 
 To run the experiments one can manually change the `params.yaml` file with
 different parameters. Then, simply run the following commands:
@@ -92,7 +92,7 @@ Afterwards, we can compare the performance of the models by running:
 dvc exp show
 ```
 
-## Experiment Results
+## 📋 Experiment Results
 
 The above experiments yield the following results.
 
@@ -121,7 +121,7 @@ regularization factors, we got the following results.
 
 
 
-# Acknowledgments
+# 🏬 Acknowledgments
 This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
 
 The work is supported by the following EU Horizon 2020 projects:
