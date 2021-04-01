@@ -96,16 +96,18 @@ dvc exp show
 
 The above experiments yield the following results.
 
-| Model 	| EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
+| Model 	   | EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
 |-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 | BERT-CLS  | .978 / .987 | .978 / .987 | .851 / .912 | .955 / .973 | .913 / .947 |
 | BERT-MAX  | .941 / .964 | .948 / .969 | .798 / .874 | .912 / .946 | .824 / .886 |
 | BERT-MEAN | .967 / .980 | .958 / .976 | .786 / .874 | .941 / .965 | .835 / .897 |
-| LM-EMD  	| .977 / .986 | .974 / .985 | .801 / .874 | .955 / .973 | .890 / .932 |
+| LM-EMD   	| .977 / .986 | .974 / .985 | .801 / .874 | .955 / .973 | .890 / .932 |
 <caption>
-Table 1. CLIR performance formatted as P@1/MAP scores.
+Table 1. CLIR performance of the models. The scores are formatted as P@1/MAP scores.
 </caption>
 
+<br/>
+<br/>
 
 
 When comparing the performance of the LM-EMD model using the cross-entropy and pairwise ranking loss at different
@@ -122,7 +124,7 @@ regularization factors, we got the following results.
 <caption>
 Table 2. The performance comparison of the LM-EMD model trained with different regularization
 factor (γ) values, and using the cross-entropy (CE) and pairwise ranking (PR) loss functions
-during training.
+during training. The scores are formatted as P@1/MAP scores.
 </caption>
 
 
