@@ -1,6 +1,6 @@
 # LM-EMD
 The repository containing the experiment files for the explainable
-cross-lingual document ranking model using multilingual language model 
+cross-lingual document ranking model using multilingual language model
 and Regularized Earth Movers Distance.
 
 
@@ -91,6 +91,35 @@ Afterwards, we can compare the performance of the models by running:
 ```bash
 dvc exp show
 ```
+
+## Experiment Results
+
+The above experiments yield the following results.
+
+| Model 	    | P@1 (EN → DE) | MAP (EN → DE) | P@1 (EN → FR) | MAP (EN → FR) | P@1 (EN → TL) | MAP (EN → TL) | P@1 (EN → JA) | MAP (EN → JA) | P@1 (EN → SW) | MAP (EN → SW) |
+|-------------- |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| BERT-CLS  	| .978  | .987  | .978  | .987  | .851  | .912  | .955  | .973  | .913  | .947  |
+| BERT-MAX  	| .941  | .964  | .948  | .969  | .798  | .874  | .912  | .946  | .824  | .886  |
+| BERT-MEAN  	| .967  | .980  | .958  | .976  | .786  | .874  | .941  | .965  | .835  | .897  |
+| LM-EMD  	    | .977  | .986  | .974  | .985  | .801  | .874  | .955  | .973  | .890  | .932  |
+
+
+When comparing the performance of the LM-EMD model using the cross-entropy and pairwise ranking loss at different
+regularization factors, we got the following results.
+
+| Params  | Loss             | P@1 (EN → DE) | MAP (EN → DE) | P@1 (EN → FR) | MAP (EN → FR) | P@1 (EN → TL) | MAP (EN → TL) | P@1 (EN → JA) | MAP (EN → JA) | P@1 (EN → SW) | MAP (EN → SW) |
+|---------|----------------- |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| γ = 0.1 | cross-entropy    | .865  | .921  | .830  | .902  | .699  | .822  | -     |  -    | -     | -     |
+|         | pairwise ranking | .977  | .986  | .974  | .985  | .801  | .874  | .955  | .973  | .890  | .932  |
+| γ = 1   | cross-entropy    | .862  | .919  | .823  | .898  | .701  | .824  | -     | -     | -     | -     |
+|         | pairwise ranking | .970  | .982  | .968  | .981  | .809  | .883  | .910  | .946  | .859  | .913  |
+| γ = 10  | cross-entropy    | .874  | .926  | .838  | .907  | .712  | .830  | -     | -     | -     | -     |
+|         | pairwise ranking | .965  | .979  | .961  | .978  | .805  | .881  | .899  | .941  | .835  | .899  |
+
+
+
+
+
 
 # Acknowledgments
 This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
