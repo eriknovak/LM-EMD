@@ -1,7 +1,8 @@
-# BERT EMD
+# LM-EMD
 The repository containing the experiment files for the explainable
-document ranking model using multilingual BERT and Regularized Earth
-Movers Distance.
+cross-lingual document ranking model using multilingual language model 
+and Regularized Earth Movers Distance.
+
 
 ## Requirements
 Before starting the project make sure these requirements are available:
@@ -10,9 +11,6 @@ Before starting the project make sure these requirements are available:
 - [dvc][dvc]. For versioning your data (part of conda environment).
 
 ## Setup
-
-**NOTE:** For each new project it is advisable to change the environment name
-and to make sure that the required modules are in the `environment.yml` file.
 
 ### Install the conda environment
 
@@ -27,7 +25,7 @@ conda env create -f environment.yml
 To activate the newly set environment run:
 
 ```bash
-conda activate bert-emd
+conda activate lm-emd
 ```
 
 ### Install the CUDA version of PyTorch
@@ -77,9 +75,9 @@ command:
 
 ```bash
 # prepare the queue of experiments
-dvc exp run --queue -S model.ranking=cls
-dvc exp run --queue -S model.ranking=max
-dvc exp run --queue -S model.ranking=mean
+dvc exp run --queue -S model.ranking=cls -S model.reg=None -S model.nit=None
+dvc exp run --queue -S model.ranking=max -S model.reg=None -S model.nit=None
+dvc exp run --queue -S model.ranking=mean -S model.reg=None -S model.nit=None
 dvc exp run --queue -S model.ranking=emd -S model.reg=0.1
 dvc exp run --queue -S model.ranking=emd -S model.reg=1
 dvc exp run --queue -S model.ranking=emd -S model.reg=10
@@ -94,6 +92,15 @@ Afterwards, we can compare the performance of the models by running:
 dvc exp show
 ```
 
+# Acknowledgments
+This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
+
+The work is supported by the following EU Horizon 2020 projects:
+- [Envirolens][elens] (grant no. 761758). The project demonstrates and promotes the use of Earth observation as direct evidence for environmental law enforcement,
+including in a court of law and in related contractual negotiations.
+- [X5GON][x5gon] (grant no. 821918). The projects goal is to connect different Open Educational Resources (OER) providers around the globe and to provide meaningful
+ AI tools to support the learning process.
+
 
 
 
@@ -105,3 +112,8 @@ dvc exp show
 [git]: https://git-scm.com/
 [dvc]: https://dvc.org/
 [conda]: https://docs.conda.io/en/latest/
+
+[ailab]: http://ailab.ijs.si/
+[ijs]: https://www.ijs.si/
+[elens]: https://envirolens.eu/
+[x5gon]: https://www.x5gon.org/
