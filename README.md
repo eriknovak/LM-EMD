@@ -135,9 +135,6 @@ regularization factors, we got the following results.
 factor (γ) values, and using the cross-entropy (CE) and pairwise ranking (PR) loss functions
 during training. The scores are formatted as P@1/MAP scores.*
 
-<br/>
-<br/>
-
 ## 🔎 Interpretability
 
 ```bash
