@@ -103,7 +103,6 @@ dvc exp apply [exp-id]
 
 ## 📋 Experiment Results
 
-The above experiments yield the following results.
 
 | Model 	| EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
 |-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
@@ -115,12 +114,6 @@ The above experiments yield the following results.
 *Table 1. CLIR performance of the models. The scores are formatted as P@1/MAP scores.*
 
 
-<br/>
-<br/>
-
-
-When comparing the performance of the LM-EMD model using the cross-entropy and pairwise ranking loss at different
-regularization factors, we got the following results.
 
 | Params  | Loss   | EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
 |---------|--------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
