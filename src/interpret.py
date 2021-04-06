@@ -124,22 +124,23 @@ def generate_visualization(outputs, examples, image_file):
 
     # prepare the figure size based on the input
     xsize = 1.2 * dsize
-    ysize = 0.6 * bsize * qsize
+    ysize = 0.65 * bsize * qsize
 
     # initialize the figure
     fig, ax = plt.subplots(nrows=bsize, ncols=2, figsize=(xsize, ysize))
-
+    if bsize == 1:
+        ax = [ax]
     # iterate through the examples
     for i in range(bsize):
 
         # the cosine distance matrix
-        ax[i][0].set_title("cost matrix")
+        ax[i][0].set_title("cost matrix", fontsize="xx-large")
         cmim = ax[i][0].imshow(cm[i].numpy(), cmap="PuBu", vmin=0)
         cbar = fig.colorbar(cmim, ax=ax[i][0], shrink=0.9)
         cbar.ax.set_ylabel("cosine distance", rotation=-90, va="bottom")
 
         # the EMD transport matrix
-        ax[i][1].set_title("EMD transport matrix")
+        ax[i][1].set_title("EMD transport matrix", fontsize="xx-large")
         tmim = ax[i][1].imshow(tm[i] / tm[i].max(), cmap="Greens", vmin=0, vmax=1)
         cbar = fig.colorbar(tmim, ax=ax[i][1], shrink=0.9)
         cbar.ax.set_ylabel("mass transport", rotation=-90, va="bottom")
@@ -153,8 +154,8 @@ def generate_visualization(outputs, examples, image_file):
             ax[i][j].set_xticks(np.arange(len(d_tokens)))
             ax[i][j].set_yticks(np.arange(len(q_tokens)))
             # add the x and y labels
-            ax[i][j].set_xticklabels(d_tokens)
-            ax[i][j].set_yticklabels(q_tokens)
+            ax[i][j].set_xticklabels(d_tokens, fontsize=14)
+            ax[i][j].set_yticklabels(q_tokens, fontsize=14)
             # rotate the x labels a bit
             plt.setp(
                 ax[i][j].get_xticklabels(),
@@ -170,7 +171,7 @@ def generate_visualization(outputs, examples, image_file):
             rotation=-90,
             va="bottom",
             labelpad=30,
-            fontsize=14
+            fontsize=14,
         )
 
     # make the layout more tight
@@ -189,19 +190,19 @@ def generate_visualization(outputs, examples, image_file):
 batch = {
     "query": [
         # TODO: modify query texts
-        "speaking to the media",
-        "speaking to the media",
-        "speaking to the media",
-        "speaking to the media",
-        "speaking to the media",
+        "Who was the first president of the United States?",
+        "Who was the first president of the United States?",
+        "Who was the first president of the United States?",
+        "Who was the first president of the United States?",
+        "Who was the first president of the United States?",
     ],
     "documents": [
         # TODO: modify document texts
-        "Obama speaks to the media in California.",
-        "Obama spricht mit den Medien in Kalifornien.",
-        "Obama je govoril pred mediji v Kaliforniji.",
-        "Ich würde heute nicht zur Schule gehen wollen, sagte das kleine Kind.",
-        "Trump had a speech at the rally in Massachusetts.",
+        "George Washington war von 1789 bis 1797 der erste Präsident der Vereinigten Staaten von Amerika.",
+        "Abraham Lincoln amtierte von 1861 bis 1865 als 16. Präsident der Vereinigten Staaten von Amerika.",
+        "Marie Skłodowska Curie war eine Physikerin und Chemikerin polnischer Herkunft, die in Frankreich lebte und wirkte.",
+        "Augusta Ada King-Noel, Countess of Lovelace, allgemein als Ada Lovelace bekannt war eine britische Mathematikerin.",
+        "Christoph Kolumbus wurde der erste Vizekönig der las Indias genannten Gebiete.",
     ],
 }
 

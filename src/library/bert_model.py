@@ -79,11 +79,11 @@ def sinkhorn(
     istep = 0
     while istep < nit:
         # calculate K.T * u for each example in batch
-        KTransposeU = K.transpose(1, 2).bmm(u.unsqueeze(2)).squeeze()
+        KTransposeU = K.transpose(1, 2).bmm(u.unsqueeze(2)).squeeze(2)
         # calculate the v_{i} tensor
         v = d_dist / KTransposeU
         # calculate the u_{i} tensor
-        u = 1.0 / Kp.bmm(v.unsqueeze(2)).squeeze()
+        u = 1.0 / Kp.bmm(v.unsqueeze(2)).squeeze(2)
         # go to next step
         istep = istep + 1
     # calculate the transport matrix

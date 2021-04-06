@@ -105,7 +105,7 @@ dvc exp apply [exp-id]
 
 The above experiments yield the following results.
 
-| Model 	   | EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
+| Model 	| EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
 |-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 | BERT-CLS  | .978 / .987 | .978 / .987 | .851 / .912 | .955 / .973 | .913 / .947 |
 | BERT-MAX  | .941 / .964 | .948 / .969 | .798 / .874 | .912 / .946 | .824 / .886 |
@@ -135,15 +135,32 @@ regularization factors, we got the following results.
 factor (γ) values, and using the cross-entropy (CE) and pairwise ranking (PR) loss functions
 during training. The scores are formatted as P@1/MAP scores.*
 
-<br/>
-<br/>
-
 ## 🔎 Interpretability
 
+The LM-EMD has one advantage over the rest of the evaluated models: interpetability.
+Not only does Earth Mover's Distance return us the final relevance score of the document,
+it also returns the so called **transportation matrix** which shows which terms in the
+document a mapped to which term in the query; giving us an idea from where the document
+score somes from.
+
+The transportation matrix is generated using the Singhorn algorihm by using the pre-generated
+cost matrix, which in our case contains the cosine distances of the query and document terms.
+
+The visual interpretation of the example in the paper is shown bellow (for all documents).
+![president-usa](./data/interpretability/president-usa.png)
+
+
+
+### Generating other Examples
+
+Once the model is trained one can modify `batch` values in[./src/interpret.py][interpret].
+To visualize the interpertation simply run the following command:
+
 ```bash
-python src/interpret.py data/model.pth data/interpret.png
+python src/interpret.py data/model.pth data/interpretability/interpret.png
 ```
 
+This will generate an image in the [./data/interpretability][interdata] folder.
 
 # 🏬 Acknowledgments
 This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
@@ -166,7 +183,11 @@ including in a court of law and in related contractual negotiations.
 [dvc]: https://dvc.org/
 [conda]: https://docs.conda.io/en/latest/
 
+[interpret]: ./src/interpret.py
+[interdata]: ./data/interpretability
+
 [ailab]: http://ailab.ijs.si/
 [ijs]: https://www.ijs.si/
 [elens]: https://envirolens.eu/
 [x5gon]: https://www.x5gon.org/
+
