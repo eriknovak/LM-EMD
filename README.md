@@ -57,6 +57,8 @@ This will download the data used in the experiments.
 
 ## 🥼 Experiment Setup
 
+**NOTE:** Training a single model requires approximate 10 GB of GPU space.
+
 To run the experiments one can manually change the `params.yaml` file with
 different parameters. Then, simply run the following commands:
 
