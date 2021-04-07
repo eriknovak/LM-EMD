@@ -140,10 +140,10 @@ def generate_visualization(outputs, examples, image_file):
         cbar.ax.set_ylabel("cosine distance", rotation=-90, va="bottom")
 
         # the EMD transport matrix
-        ax[i][1].set_title("EMD transport matrix", fontsize="xx-large")
+        ax[i][1].set_title("transport matrix", fontsize="xx-large")
         tmim = ax[i][1].imshow(tm[i] / tm[i].max(), cmap="Greens", vmin=0, vmax=1)
         cbar = fig.colorbar(tmim, ax=ax[i][1], shrink=0.9)
-        cbar.ax.set_ylabel("mass transport", rotation=-90, va="bottom")
+        cbar.ax.set_ylabel("mass transport (match)", rotation=-90, va="bottom")
 
         # query and document tokens
         q_tokens = tokenizer.convert_ids_to_tokens(q_input_ids[i])
