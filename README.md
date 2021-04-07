@@ -1,7 +1,7 @@
 # LM-EMD
-The repository containing the experiment files for the explainable
+The repository containing the experiment files for the interpretable
 cross-lingual document ranking model using multilingual language model
-and Regularized Earth Movers Distance.
+and Regularized Earth Mover's Distance.
 
 
 ## ✔️ Requirements
@@ -31,7 +31,7 @@ conda activate lm-emd
 ### Install the CUDA version of PyTorch
 
 Use conda to install the appropriate version of PyTorch. **NOTE:** Be
-sure you install the right CUDA version.
+sure you install the CUDA version that is supported by your machine.
 
 ```bash
 conda install pytorch cudatoolkit=11.1 -c pytorch -c conda-forge
@@ -56,6 +56,8 @@ sh ./download.sh
 This will download the data used in the experiments.
 
 ## 🥼 Experiment Setup
+
+**NOTE:** Training a single model requires approximate 10 GB of GPU space.
 
 To run the experiments one can manually change the `params.yaml` file with
 different parameters. Then, simply run the following commands:
@@ -95,16 +97,15 @@ dvc exp show
 To save the best performance parameters run:
 
 ```bash
-dvc exp apply [exp-id]
+# [exp-id] is the ID of the experiment that yielded the best performance
+dvc exp apply [exp-id] 
 ```
-
-
 
 
 ## 📋 Experiment Results
 
 
-| Model 	| EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
+| Model    	| EN → DE     | EN → FR     | EN → TL     | EN → JA     | EN → SW     |
 |-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 | BERT-CLS  | .978 / .987 | .978 / .987 | .851 / .912 | .955 / .973 | .913 / .947 |
 | BERT-MAX  | .941 / .964 | .948 / .969 | .798 / .874 | .912 / .946 | .824 / .886 |
@@ -136,12 +137,17 @@ it also returns the so called **transportation matrix** which shows which terms 
 document a mapped to which term in the query; giving us an idea from where the document
 score somes from.
 
-The transportation matrix is generated using the Singhorn algorihm by using the pre-generated
+The transportation matrix is generated using the Sinkhorn algorihm by using the pre-generated
 cost matrix, which in our case contains the cosine distances of the query and document terms.
+The transportation matrix can tell us which terms in the query and document are closest, e.g.
+have the biggest influence on lowering the document score. 
 
-The visual interpretation of the example in the paper is shown bellow (for all documents).
+With this we are able to interpret that the document has the score because of term mapping 
+represented in the transportation matrix.
+
+Here are the cost and transportation matrices of the interpretability example found in the 
+paper.
 ![president-usa](./data/interpretability/president-usa.png)
-
 
 
 ### Generating other Examples
