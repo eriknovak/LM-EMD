@@ -98,7 +98,7 @@ To save the best performance parameters run:
 
 ```bash
 # [exp-id] is the ID of the experiment that yielded the best performance
-dvc exp apply [exp-id] 
+dvc exp apply [exp-id]
 ```
 
 
@@ -132,20 +132,17 @@ during training. The scores are formatted as P@1/MAP scores.*
 ## 🔎 Interpretability
 
 The LM-EMD has one advantage over the rest of the evaluated models: interpetability.
-Not only does Earth Mover's Distance return us the final relevance score of the document,
+Not only does Earth Mover's Distance return the final relevance score of the document,
 it also returns the so called **transportation matrix** which shows which terms in the
-document a mapped to which term in the query; giving us an idea from where the document
-score somes from.
+document match the terms in the query; giving an idea from where the document
+scores come from.
 
 The transportation matrix is generated using the Sinkhorn algorihm by using the pre-generated
-cost matrix, which in our case contains the cosine distances of the query and document terms.
-The transportation matrix can tell us which terms in the query and document are closest, e.g.
-have the biggest influence on lowering the document score. 
+cost matrix containing the cosine distances between the query and document terms.
+The transportation matrix tells us which terms in the query and document are closest, e.g.
+have the biggest influence on the document score.
 
-With this we are able to interpret that the document has the score because of term mapping 
-represented in the transportation matrix.
-
-Here are the cost and transportation matrices of the interpretability example found in the 
+Here are the cost and transportation matrices of the interpretability example found in the
 paper.
 ![president-usa](./data/interpretability/president-usa.png)
 
