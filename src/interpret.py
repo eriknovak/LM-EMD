@@ -134,13 +134,13 @@ def generate_visualization(outputs, examples, image_file):
     for i in range(bsize):
 
         # the cosine distance matrix
-        ax[i][0].set_title("cost matrix", fontsize="xx-large")
+        ax[i][0].set_title("distance matrix", fontsize="xx-large")
         cmim = ax[i][0].imshow(cm[i].numpy(), cmap="PuBu", vmin=0)
         cbar = fig.colorbar(cmim, ax=ax[i][0], shrink=0.9)
         cbar.ax.set_ylabel("cosine distance", rotation=-90, va="bottom")
 
         # the EMD transport matrix
-        ax[i][1].set_title("transport matrix", fontsize="xx-large")
+        ax[i][1].set_title("transportation matrix", fontsize="xx-large")
         tmim = ax[i][1].imshow(tm[i] / tm[i].max(), cmap="Greens", vmin=0, vmax=1)
         cbar = fig.colorbar(tmim, ax=ax[i][1], shrink=0.9)
         cbar.ax.set_ylabel("mass transport (match)", rotation=-90, va="bottom")
