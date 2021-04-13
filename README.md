@@ -153,19 +153,21 @@ Once the model is trained one can modify `batch` values in[./src/interpret.py][i
 To visualize the interpertation simply run the following command:
 
 ```bash
-python src/interpret.py data/model.pth data/interpretability/interpret.png
+python src/interpret.py data/model.pth data/interpretability/{new-image-name}.png
 ```
 
-This will generate an image in the [./data/interpretability][interdata] folder.
+where `{new-image-name}` is the name of the image. This will generate an image in the
+[./data/interpretability][interdata] folder.
 
 # 🏬 Acknowledgments
 This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
 
 The work is supported by the following EU Horizon 2020 projects:
-- [Envirolens][elens] (grant no. 761758). The project demonstrates and promotes the use of Earth observation as direct evidence for environmental law enforcement,
-including in a court of law and in related contractual negotiations.
-- [X5GON][x5gon] (grant no. 821918). The projects goal is to connect different Open Educational Resources (OER) providers around the globe and to provide meaningful
+- [X5GON][x5gon] (grant no. 761758). The projects goal is to connect different Open Educational Resources (OER) providers around the globe and to provide meaningful
  AI tools to support the learning process.
+- [Envirolens][elens] (grant no. 821918). The project demonstrates and promotes the use of Earth observation as direct evidence for environmental law enforcement,
+including in a court of law and in related contractual negotiations.
+
 
 
 
