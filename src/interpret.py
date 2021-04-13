@@ -200,9 +200,9 @@ batch = {
         # TODO: modify document texts
         "George Washington war von 1789 bis 1797 der erste Präsident der Vereinigten Staaten von Amerika.",
         "Abraham Lincoln amtierte von 1861 bis 1865 als 16. Präsident der Vereinigten Staaten von Amerika.",
-        "Marie Skłodowska Curie war eine Physikerin und Chemikerin polnischer Herkunft, die in Frankreich lebte und wirkte.",
-        "Augusta Ada King-Noel, Countess of Lovelace, allgemein als Ada Lovelace bekannt war eine britische Mathematikerin.",
         "Christoph Kolumbus wurde der erste Vizekönig der las Indias genannten Gebiete.",
+        "Augusta Ada King-Noel, Countess ofS Lovelace, allgemein als Ada Lovelace bekannt war eine britische Mathematikerin.",
+        "Marie Skłodowska Curie war eine Physikerin und Chemikerin polnischer Herkunft, die in Frankreich lebte und wirkte.",
     ],
 }
 
