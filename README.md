@@ -76,13 +76,27 @@ is installed with `conda`. To run multiple experiments we execute the following
 command:
 
 ```bash
-# prepare the queue of experiments
+# prepare the queue of experiments using pairwise_ranking
 dvc exp run --queue -S model.ranking=cls -S model.reg=None -S model.nit=None
 dvc exp run --queue -S model.ranking=max -S model.reg=None -S model.nit=None
 dvc exp run --queue -S model.ranking=mean -S model.reg=None -S model.nit=None
 dvc exp run --queue -S model.ranking=emd -S model.reg=0.1
 dvc exp run --queue -S model.ranking=emd -S model.reg=1
 dvc exp run --queue -S model.ranking=emd -S model.reg=10
+
+# execute all queued experiments (run 3 jobs in parallel)
+dvc exp run --run-all --jobs 3
+```
+
+To train the models using cross entropy:
+```bash
+# to train the models using cross-entropy
+dvc exp run --queue -S train.loss=cross_entropy -S model.ranking=cls -S model.reg=None -S model.nit=None
+dvc exp run --queue -S train.loss=cross_entropy -S model.ranking=max -S model.reg=None -S model.nit=None
+dvc exp run --queue -S train.loss=cross_entropy -S model.ranking=mean -S model.reg=None -S model.nit=None
+dvc exp run --queue -S train.loss=cross_entropy -S model.ranking=emd -S model.reg=0.1
+dvc exp run --queue -S train.loss=cross_entropy -S model.ranking=emd -S model.reg=1
+dvc exp run --queue -S train.loss=cross_entropy -S model.ranking=emd -S model.reg=10
 
 # execute all queued experiments (run 3 jobs in parallel)
 dvc exp run --run-all --jobs 3
