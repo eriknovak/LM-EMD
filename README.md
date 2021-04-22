@@ -163,8 +163,8 @@ paper.
 
 ### Generating other Examples
 
-Once the model is trained one can modify `batch` values in[./src/interpret.py][interpret].
-To visualize the interpertation simply run the following command:
+Once the model is trained one can modify the `batch` values in [./src/interpret.py][interpret].
+To visualize the interpertation graphs simply run the following command:
 
 ```bash
 python src/interpret.py data/model.pth data/interpretability/{new-image-name}.png
