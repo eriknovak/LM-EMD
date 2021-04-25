@@ -71,7 +71,10 @@ def get_document_scores(batch):
         batch["query"], truncation=True, padding=True, return_tensors="pt"
     )
     d_inputs = tokenizer(
-        batch["documents"], truncation=True, padding=True, return_tensors="pt"
+        [d["text"] for d in batch["documents"]],
+        truncation=True,
+        padding=True,
+        return_tensors="pt",
     )
     # get the input batches
     examples = {
@@ -127,38 +130,57 @@ def generate_visualization(outputs, examples, image_file):
     ysize = 0.65 * bsize * qsize
 
     # initialize the figure
-    fig, ax = plt.subplots(nrows=bsize, ncols=2, figsize=(xsize, ysize))
+    fig, big_axes = plt.subplots(nrows=bsize, ncols=1, figsize=(xsize, ysize))
     if bsize == 1:
-        ax = [ax]
+        big_axes = [big_axes]
+
+    for idx, big_ax in enumerate(big_axes):
+        title = batch["documents"][idx]["title"]
+        big_ax.set_title(title, fontsize=24)
+        # Turn off axis lines and ticks of the big subplot
+        # obs alpha is 0 in RGBA string!
+        big_ax.tick_params(
+            labelcolor=(1.0, 1.0, 1.0, 0.0),
+            top=False,
+            bottom=False,
+            left=False,
+            right=False,
+        )
+        # removes the white frame
+        big_ax._frameon = False
+
     # iterate through the examples
     for i in range(bsize):
+        ax_distance = fig.add_subplot(bsize, 2, 2 * i + 1)
+        ax_transport = fig.add_subplot(bsize, 2, 2 * i + 2)
 
         # the cosine distance matrix
-        ax[i][0].set_title("distance matrix", fontsize="xx-large")
-        cmim = ax[i][0].imshow(cm[i].numpy(), cmap="PuBu", vmin=0)
-        cbar = fig.colorbar(cmim, ax=ax[i][0], shrink=0.9)
+        ax_distance.set_title("distance matrix", fontsize="xx-large")
+        cmim = ax_distance.imshow(cm[i].numpy(), cmap="PuBu", vmin=0)
+        cbar = fig.colorbar(cmim, ax=ax_distance, shrink=0.9)
         cbar.ax.set_ylabel("cosine distance", rotation=-90, va="bottom")
 
         # the EMD transport matrix
-        ax[i][1].set_title("transportation matrix", fontsize="xx-large")
-        tmim = ax[i][1].imshow(tm[i] / tm[i].max(), cmap="Greens", vmin=0, vmax=1)
-        cbar = fig.colorbar(tmim, ax=ax[i][1], shrink=0.9)
+        ax_transport.set_title("transportation matrix", fontsize="xx-large")
+        tmim = ax_transport.imshow(tm[i] / tm[i].max(), cmap="Greens", vmin=0, vmax=1)
+        cbar = fig.colorbar(tmim, ax=ax_transport, shrink=0.9)
         cbar.ax.set_ylabel("mass transport (match)", rotation=-90, va="bottom")
 
         # query and document tokens
         q_tokens = tokenizer.convert_ids_to_tokens(q_input_ids[i])
         d_tokens = tokenizer.convert_ids_to_tokens(d_input_ids[i])
 
+        plots = [ax_distance, ax_transport]
         for j in range(2):
             # set the x and y ticks
-            ax[i][j].set_xticks(np.arange(len(d_tokens)))
-            ax[i][j].set_yticks(np.arange(len(q_tokens)))
+            plots[j].set_xticks(np.arange(len(d_tokens)))
+            plots[j].set_yticks(np.arange(len(q_tokens)))
             # add the x and y labels
-            ax[i][j].set_xticklabels(d_tokens, fontsize=14)
-            ax[i][j].set_yticklabels(q_tokens, fontsize=14)
+            plots[j].set_xticklabels(d_tokens, fontsize=14)
+            plots[j].set_yticklabels(q_tokens, fontsize=14)
             # rotate the x labels a bit
             plt.setp(
-                ax[i][j].get_xticklabels(),
+                plots[j].get_xticklabels(),
                 rotation=45,
                 ha="right",
                 rotation_mode="anchor",
@@ -166,7 +188,7 @@ def generate_visualization(outputs, examples, image_file):
 
         # assign the document score (lower scores -> greater rank)
         d_score = round(scores[i].item(), 3)
-        ax[i][0].set_ylabel(
+        plots[0].set_ylabel(
             f"Document score: {d_score}",
             rotation=-90,
             va="bottom",
@@ -198,11 +220,26 @@ batch = {
     ],
     "documents": [
         # TODO: modify document texts
-        "George Washington war von 1789 bis 1797 der erste Präsident der Vereinigten Staaten von Amerika.",
-        "Abraham Lincoln amtierte von 1861 bis 1865 als 16. Präsident der Vereinigten Staaten von Amerika.",
-        "Christoph Kolumbus wurde der erste Vizekönig der las Indias genannten Gebiete.",
-        "Augusta Ada King-Noel, Countess ofS Lovelace, allgemein als Ada Lovelace bekannt war eine britische Mathematikerin.",
-        "Marie Skłodowska Curie war eine Physikerin und Chemikerin polnischer Herkunft, die in Frankreich lebte und wirkte.",
+        {
+            "title": "George Washington",
+            "text": "George Washington war von 1789 bis 1797 der erste Präsident der Vereinigten Staaten von Amerika.",
+        },
+        {
+            "title": "Abraham Lincoln",
+            "text": "Abraham Lincoln amtierte von 1861 bis 1865 als 16. Präsident der Vereinigten Staaten von Amerika.",
+        },
+        {
+            "title": "Christopher Columbus",
+            "text": "Christoph Kolumbus wurde der erste Vizekönig der las Indias genannten Gebiete.",
+        },
+        {
+            "title": "Ada Lovelace",
+            "text": "Augusta Ada King-Noel, Countess ofS Lovelace, allgemein als Ada Lovelace bekannt war eine britische Mathematikerin.",
+        },
+        {
+            "title": "Marie Skłodowska Curie",
+            "text": "Marie Skłodowska Curie war eine Physikerin und Chemikerin polnischer Herkunft, die in Frankreich lebte und wirkte.",
+        },
     ],
 }
 
