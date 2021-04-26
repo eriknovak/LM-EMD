@@ -177,11 +177,9 @@ where `{new-image-name}` is the name of the image. This will generate an image i
 This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
 
 The work is supported by the following EU Horizon 2020 projects:
-- [X5GON][x5gon] (grant no. 761758). The projects goal is to connect different Open Educational Resources (OER) providers around the globe and to provide meaningful
- AI tools to support the learning process.
-- [Envirolens][elens] (grant no. 821918). The project demonstrates and promotes the use of Earth observation as direct evidence for environmental law enforcement,
-including in a court of law and in related contractual negotiations.
-
+- [X5GON][x5gon] (H2020-ICT-761758)
+- [Envirolens][elens] (H2020-DT-SPACE-821918)
+- [Humane AI NET][humaneai] (H2020-ICT-952026)
 
 
 
@@ -200,6 +198,7 @@ including in a court of law and in related contractual negotiations.
 
 [ailab]: http://ailab.ijs.si/
 [ijs]: https://www.ijs.si/
-[elens]: https://envirolens.eu/
-[x5gon]: https://www.x5gon.org/
 
+[x5gon]: https://www.x5gon.org/
+[elens]: https://envirolens.eu/
+[humaneai]: https://www.humane-ai.eu/
