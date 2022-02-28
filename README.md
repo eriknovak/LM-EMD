@@ -197,6 +197,4 @@ The work is supported by the following EU Horizon 2020 projects:
 [ailab]: http://ailab.ijs.si/
 [ijs]: https://www.ijs.si/
 
-[x5gon]: https://www.x5gon.org/
-[elens]: https://envirolens.eu/
 [humaneai]: https://www.humane-ai.eu/
