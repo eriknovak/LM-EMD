@@ -177,8 +177,6 @@ where `{new-image-name}` is the name of the image. This will generate an image i
 This work is developed by [Department of Artificial Intelligence][ailab] at [Jozef Stefan Institute][ijs].
 
 The work is supported by the following EU Horizon 2020 projects:
-- [X5GON][x5gon] (H2020-ICT-761758)
-- [Envirolens][elens] (H2020-DT-SPACE-821918)
 - [Humane AI NET][humaneai] (H2020-ICT-952026)
 
 
