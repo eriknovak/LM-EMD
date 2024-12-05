@@ -3,6 +3,24 @@ The repository containing the experiment files for the interpretable
 cross-lingual document ranking model using multilingual language model
 and Regularized Earth Mover's Distance.
 
+## 🔃 Citation
+
+If you find this code useful, feel free to reference the following paper:
+
+```
+@article{Novak2022-wi,
+  title = {Why is a document relevant? Understanding the relevance scores in cross-lingual document retrieval},
+  journal = {Knowledge-Based Systems},
+  volume = {244},
+  pages = {108545},
+  year = {2022},
+  issn = {0950-7051},
+  doi = {https://doi.org/10.1016/j.knosys.2022.108545},
+  url = {https://www.sciencedirect.com/science/article/pii/S0950705122002416},
+  author = {Erik Novak and Luka Bizjak and Dunja Mladenić and Marko Grobelnik},
+}
+```
+
 
 ## ✔️ Requirements
 Before starting the project make sure these requirements are available:
